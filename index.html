@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halil Selvitopu Resim Galerisi</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      margin: 20px 0;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #image-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .square {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .square img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .square:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1 id="gallery-title">Halil Selvitopu Resim Galerisi</h1>
+  <div id="image-container"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function getRandomImage() {
+        return `https://source.unsplash.com/random/200x300?sig=${Math.floor(Math.random() * 1000)}`;
+      }
+
+      function createSquare() {
+        const imageContainer = document.getElementById("image-container");
+
+        const square = document.createElement("div");
+        square.classList.add("square");
+
+        const img = document.createElement("img");
+        img.src = getRandomImage();
+
+        square.appendChild(img);
+        imageContainer.appendChild(square);
+      }
+
+      
+      for (let i = 0; i < 16; i++) {
+        createSquare();
+      }
+
+      
+      const title = document.getElementById("gallery-title");
+      setInterval(() => {
+        title.style.transform = "scale(1.1)";
+        setTimeout(() => {
+          title.style.transform = "scale(1)";
+        }, 300);
+      }, 1000); 
+    });
+  </script>
+</body>
+</html>
